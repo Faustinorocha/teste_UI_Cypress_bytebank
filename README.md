@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# Testes E2E Cypress - Bytebank 🚀
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Repositório com **testes end-to-end** para a aplicação **Bytebank** (React + JSON Server API) usando **Cypress**.
 
-## Available Scripts
+[![Cypress Dashboard](https://img.shields.io/badge/cypress-dashboard-brightgreen)](https://dashboard.cypress.io)
+[![Tests](https://img.shields.io/badge/tests-passing-brightgreen)](https://github.com/Faustinorocha/teste_UI_Cypress_bytebank/actions)
 
-In the project directory, you can run:
+## 🚀 Tecnologias
+- **Frontend**: React (Create React App)
+- **Backend**: JSON Server + JWT Auth  
+- **Testes**: Cypress (E2E)
+- **Node.js**: 14+
 
-### `npm start`
+## 📋 Pré-requisitos
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. **API Bytebank** (Backend Mock)
+```bash
+git clone https://github.com/SEU_USUARIO/bytebank-api.git
+cd bytebank-api
+npm install
+npm run start-api
+API roda em: http://localhost:8000
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. Aplicação Frontend
+bash
+git clone https://github.com/SEU_USUARIO/bytebank-frontend.git
+cd bytebank-frontend
+npm install
+npm start
+App roda em: http://localhost:3000
 
-### `npm test`
+3. Testes Cypress (Este repo)
+bash
+git clone https://github.com/Faustinorocha/teste_UI_Cypress_bytebank.git
+cd teste_UI_Cypress_bytebank
+npm install
+npx cypress open    # Modo interativo
+# ou
+npx cypress run     # Headless
+🧪 Testes Implementados
+Teste	Descrição	Status
+cadastro.cy.ts	Cadastro de novo usuário	✅
+transacao.cy.ts	Login + Depósito + Verificação saldo	✅
+lista-transacoes.cy.ts	Lista de transações	✅
+Cobertura: Login, Cadastro, Depósitos, Validação Saldo, Lista Transações.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+🔧 Comandos Cypress
+bash
+# Instalar dependências
+npm install
 
-### `npm run build`
+# Abrir interface Cypress
+npx cypress open
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Rodar todos os testes (headless)
+npx cypress run
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Rodar teste específico
+npx cypress run --spec "cypress/e2e/transacao.cy.ts"
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Rodar com vídeo + screenshot
+npx cypress run --headed --browser chrome
+📁 Estrutura do Projeto
+text
+teste_UI_Cypress_bytebank/
+├── cypress/
+│   ├── e2e/           # Testes (.cy.ts)
+│   ├── fixtures/      # Dados mock
+│   ├── support/       # Commands personalizados
+│   └── screenshots/   # Evidências falhas
+├── cypress.config.ts # Config Cypress
+├── package.json
+└── README.md
+🛠️ Comandos Customizados Criados
+Comando	Descrição
+cy.getByData()	Seletor data-test ou data-testid
+cy.getSaldo()	Extrai e parse saldo brasileiro (R$ 700 → 700)
+cy.loginViaUi()	Login completo pela UI
+cy.submeterFormularioCadastro()	Cadastro automatizado
+🎯 Endpoints Testados
+text
+POST /public/cadastrar     # Cadastro
+POST /public/login         # Login JWT
+POST /transacoes           # Depósito
+GET /saldo                 # Saldo atual
+GET /transacoes            # Lista transações
+🔍 Como Executar Ambiente Completo
+3 Terminais
+bash
+# Terminal 1: API
+cd bytebank-api && npm run start-api
 
-### `npm run eject`
+# Terminal 2: Frontend  
+cd bytebank-frontend && npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# Terminal 3: Testes
+cd teste_UI_Cypress_bytebank && npx cypress open
+Teste Rápido (apenas Cypress)
+bash
+npx cypress run --headed
+📊 Relatórios Automáticos
+Vídeos: cypress/videos/
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Screenshots: cypress/screenshots/
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+CI/CD: GitHub Actions configurado
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+🤝 Contribuições
+Fork o projeto
 
-## Learn More
+Crie sua feature branch (git checkout -b feature/novo-teste)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Commit (git commit -m 'feat: novo teste de saque')
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Push (git push origin feature/novo-teste)
 
-### Code Splitting
+Abra Pull Request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+📄 Licença
+MIT License - veja LICENSE.
 
-### Analyzing the Bundle Size
+Criado por: Faustino Rocha | Cypress + Bytebank 🚀
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+text
+undefined
